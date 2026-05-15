@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 class Program
 {
@@ -30,8 +30,9 @@ class Program
 
                 Entry newEntry = new Entry();
                 newEntry._date = DateTime.Now.ToShortDateString();
-                newEntry._promptText = prompt;
-                newEntry._entryText = response;
+                
+                newEntry._prompt = prompt;
+                newEntry._entry = response;
 
                 theJournal.AddEntry(newEntry);
             }

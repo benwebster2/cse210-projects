@@ -225,19 +225,6 @@
         },
 
         {
-            "label": "build-final-Foundation3",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/final/Foundation3/Foundation3.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-
-        {
             "label": "build-final-Foundation4",
             "command": "dotnet",
             "type": "process",
@@ -249,6 +236,17 @@
             ],
             "problemMatcher": "$msCompile"
         },
-
+        {
+            "label": "build-cse210-projects-journal",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/cse210-projects/journal/journal.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        }
     ]
 }

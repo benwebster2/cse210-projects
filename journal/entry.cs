@@ -27,8 +27,8 @@ public class PromptGenerator
             "What part about today did I not hate?",
             "What did I learn today?",
             "What is something I'm actually looking forward to?",
-            "If I could have done anything done differently today, what would it have been?"
-            "How did I make the world a better place today?"
+            "If I could have done anything done differently today, what would it have been?",
+            "How did I make the world a better place today?",
             "What am I grateful for today?"
         };
     }

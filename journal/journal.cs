@@ -1,17 +1,17 @@
-using system;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 public class Journal
 {
-    public List<Entry> _entries; = new List<EntryPointNotFoundException>();
+    public List<Entry> _entries = new List<Entry>();
 
     public void AddEntry(Entry entry)
     {
         _entries.Add(entry);
     }
 
-    public void DisplayEntries()
+    public void DisplayAll()
     {
         foreach (Entry entry in _entries)
         {
@@ -25,7 +25,7 @@ public class Journal
         {
             foreach (Entry entry in _entries)
             {
-                outputFile.WriteLine($"Date: {entry._date} - Prompt: {entry._prompt}");
+                writer.WriteLine($"Date: {entry._date} - Prompt: {entry._prompt}");
             }
         }
         Console.WriteLine($"Journal saved to {filename}");
