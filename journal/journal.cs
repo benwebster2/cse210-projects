@@ -1,62 +1,63 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Metadata;
 
 public class Journal
 {
-    public List<Entry> _entries = new List<Entry>();
+    public List<Entry> bwEntries = new List<Entry>();
 
-    public void AddEntry(Entry entry)
+    public void AddEntry(Entry bwEntry)
     {
-        _entries.Add(entry);
+        bwEntries.Add(bwEntry);
     }
 
     public void DisplayAll()
     {
-        foreach (Entry entry in _entries)
+        foreach (Entry bwEntry in bwEntries)
         {
-            entry.Display();
+            bwEntry.Display();
         }
     }
 
-    public void SaveToFile(string filename)
+    public void SaveToFile(string bwFileName)
     {
-        using (StreamWriter writer = new StreamWriter(filename))
+        using (StreamWriter writer = new StreamWriter(bwFileName))
         {
-            foreach (Entry entry in _entries)
+            foreach (Entry bwEntry in bwEntries)
             {
-                writer.WriteLine($"Date: {entry._date} - Prompt: {entry._prompt}");
+                writer.WriteLine($"Date: {bwEntry.bwDate} - Prompt: {bwEntry.bwPrompt}");
             }
         }
-        Console.WriteLine($"Journal saved to {filename}");
+        Console.WriteLine($"Journal saved to {bwFileName}");
     }
 
-    public void LoadFromFile(string filename)
+    public void LoadFromFile(string bwFileName)
     {
-        _entries.Clear();
+        bwEntries.Clear();
 
-        if (File.Exists(filename))
+        if (File.Exists(bwFileName))
         {
-            using (StreamReader reader = new StreamReader(filename))
+            using (StreamReader bwReader = new StreamReader(bwFileName))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                string bwLine;
+                while ((bwLine = bwReader.ReadLine()) != null)
                 {
-                    string[] parts = line.Split(new string[] { " - Prompt: " }, StringSplitOptions.None);
-                    if (parts.Length == 2)
+                    string[] bwParts = bwLine.Split(new string[] { " - Prompt: " }, StringSplitOptions.None);
+                    if (bwParts.Length == 2)
                     {
-                        Entry entry = new Entry();
-                        entry._date = parts[0].Replace("Date: ", "").Trim();
-                        entry._prompt = parts[1].Trim();
-                        _entries.Add(entry);
+                        Entry bwEntry = new Entry();
+                        bwEntry.bwDate = bwParts[0].Replace("Date: ", "").Trim();
+                        bwEntry.bwPrompt = bwParts[1].Trim();
+                        bwEntries.Add(bwEntry);
                     }
                 }
             }
-            Console.WriteLine($"Journal loaded from {filename}");
+            Console.WriteLine($"Journal loaded from {bwFileName}");
         }
         else
         {
-            Console.WriteLine($"File {filename} not found.");
+            Console.WriteLine($"File {bwFileName} not found.");
         }
 
     }

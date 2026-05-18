@@ -3,25 +3,25 @@ using System.Collections.Generic;
 
 public class Entry 
 {
-    public string _date;
-    public string _prompt;
-    public string _entry;
+    public string bwDate;
+    public string bwPrompt;
+    public string bwEntryText;
 
     public void Display()
     {
-        Console.WriteLine($"Date: {_date} - Prompt: {_prompt}");
-        Console.WriteLine($"{_entry}");
-        Console.WriteLine($"Entry: {_entry}");
+        Console.WriteLine($"Date: {bwDate} - Prompt: {bwPrompt}");
+        Console.WriteLine($"{bwEntryText}");
+        Console.WriteLine($"Entry: {bwEntryText}");
     }
 }
 
 public class PromptGenerator
 {
-    private List<string> _prompts;
+    private List<string> bwPrompts;
 
     public PromptGenerator()
     {
-        _prompts = new List<string>
+        bwPrompts = new List<string>
         {
             "Did I have fun today?",
             "What part about today did I not hate?",
@@ -35,8 +35,8 @@ public class PromptGenerator
 
     public string GetRandomPrompt()
     {
-        Random random = new Random();
-        int index = random.Next(_prompts.Count);
-        return _prompts[index];
+        Random bwRandom = new Random();
+        int bwIndex = bwRandom.Next(bwPrompts.Count);
+        return bwPrompts[bwIndex];
     }
 }

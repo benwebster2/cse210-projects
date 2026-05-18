@@ -4,11 +4,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        Journal theJournal = new Journal();
-        PromptGenerator promptGen = new PromptGenerator();
-        string choice = "";
+        Journal bwTheJournal = new Journal();
+        PromptGenerator bwPromptGen = new PromptGenerator();
+        string bwChoice = "";
 
-        while (choice != "5")
+        while (bwChoice != "5")
         {
             Console.WriteLine("Please select one of the following choices:");
             Console.WriteLine("1. Write");
@@ -17,39 +17,39 @@ class Program
             Console.WriteLine("4. Save");
             Console.WriteLine("5. Quit");
             Console.Write("What would you like to do? "); 
-            choice = Console.ReadLine();
+            bwChoice = Console.ReadLine();
 
-            if (choice == "1") 
+            if (bwChoice == "1") 
             {
-                string prompt = promptGen.GetRandomPrompt();
-                Console.WriteLine(prompt);
+                string bwPrompt = bwPromptGen.GetRandomPrompt();
+                Console.WriteLine(bwPrompt);
                 Console.Write("> "); 
-                string response = Console.ReadLine();
+                string bwResponse = Console.ReadLine();
 
                 Entry newEntry = new Entry();
-                newEntry._date = DateTime.Now.ToShortDateString();
-                newEntry._prompt = prompt;
-                newEntry._entry = response;
+                newEntry.bwDate = DateTime.Now.ToShortDateString();
+                newEntry.bwPrompt = bwPrompt;
+                newEntry.bwEntryText = bwResponse;
 
-                theJournal.AddEntry(newEntry);
+                bwTheJournal.AddEntry(newEntry);
             }
-            else if (choice == "2") 
+            else if (bwChoice == "2") 
             {
-                theJournal.DisplayEntries(); 
+                bwTheJournal.DisplayAll(); 
             }
-            else if (choice == "3") 
+            else if (bwChoice == "3") 
             {
                 Console.WriteLine("What is the filename?");
                 Console.Write(" "); 
-                string filename = Console.ReadLine();
-                theJournal.LoadFromFile(filename);
+                string bwFileName = Console.ReadLine();
+                bwTheJournal.LoadFromFile(bwFileName);
             }
-            else if (choice == "4") 
+            else if (bwChoice == "4") 
             {
                 Console.WriteLine("What is the filename?");
                 Console.Write(" ");
-                string filename = Console.ReadLine();
-                theJournal.SaveToFile(filename);
+                string bwFileName = Console.ReadLine();
+                bwTheJournal.SaveToFile(bwFileName);
             }
         }
     }
