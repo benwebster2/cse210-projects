@@ -4,19 +4,19 @@ using System.IO;
 
 public class GoalManager
 {
-    private List<Goal> _goals;
-    private int _score;
+    private List<Goal> bwGoals;
+    private int bwScore;
 
     public GoalManager()
     {
-        _goals = new List<Goal>();
-        _score = 0;
+        bwGoals = new List<Goal>();
+        bwScore = 0;
     }
 
     public void Start()
     {
-        bool quit = false;
-        while (!quit)
+        bool bwQuit = false;
+        while (!bwQuit)
         {
             DisplayPlayerInfo();
             Console.WriteLine("\nMenu Options:");
@@ -28,16 +28,16 @@ public class GoalManager
             Console.WriteLine("  6. Quit");
             Console.Write("Select a choice from the menu: ");
             
-            string choice = Console.ReadLine();
+            string bwChoice = Console.ReadLine();
 
-            switch (choice)
+            switch (bwChoice)
             {
                 case "1": CreateGoal(); break;
                 case "2": ListGoalDetails(); break;
                 case "3": SaveGoals(); break;
                 case "4": LoadGoals(); break;
                 case "5": RecordEvent(); break;
-                case "6": quit = true; break;
+                case "6": bwQuit = true; break;
                 default: Console.WriteLine("Invalid choice. Please try again."); break;
             }
         }
@@ -45,32 +45,32 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-        int level = (_score / 1000) + 1;
-        string title = "Novice";
-        if (level >= 13) title = "Ninja Unicorn";
-        else if (level >= 10) title = "Jedi Master";
-        else if (level >= 7) title = "Champion";
-        else if (level >= 4) title = "Disciple";
+        int bwLevel = (bwScore / 1000) + 1;
+        string bwTitle = "Novice";
+        if (bwLevel >= 13) bwTitle = "Ninja Unicorn";
+        else if (bwLevel >= 10) bwTitle = "Jedi Master";
+        else if (bwLevel >= 7) bwTitle = "Champion";
+        else if (bwLevel >= 4) bwTitle = "Disciple";
 
-        Console.WriteLine($"\nYou have {_score} points.");
-        Console.WriteLine($"Rank: Level {level} {title}");
+        Console.WriteLine($"\nYou have {bwScore} points.");
+        Console.WriteLine($"Rank: Level {bwLevel} {bwTitle}");
     }
 
     public void ListGoalNames()
     {
         Console.WriteLine("The goals are:");
-        for (int i = 0; i < _goals.Count; i++)
+        for (int bwI = 0; bwI < bwGoals.Count; bwI++)
         {
-            Console.WriteLine($"  {i + 1}. {_goals[i].GetShortName()}");
+            Console.WriteLine($"  {bwI + 1}. {bwGoals[bwI].GetShortName()}");
         }
     }
 
     public void ListGoalDetails()
     {
         Console.WriteLine("The goals are:");
-        for (int i = 0; i < _goals.Count; i++)
+        for (int bwI = 0; bwI < bwGoals.Count; bwI++)
         {
-            Console.WriteLine($"  {i + 1}. {_goals[i].GetDetailsString()}");
+            Console.WriteLine($"  {bwI + 1}. {bwGoals[bwI].GetDetailsString()}");
         }
     }
 
@@ -82,34 +82,34 @@ public class GoalManager
         Console.WriteLine("  3. Checklist Goal");
         Console.WriteLine("  4. Negative Goal (Bad Habit)");
         Console.Write("Which type of goal would you like to create? ");
-        string type = Console.ReadLine();
+        string bwType = Console.ReadLine();
 
         Console.Write("What is the name of your goal? ");
-        string name = Console.ReadLine();
+        string bwName = Console.ReadLine();
         Console.Write("What is a short description of it? ");
-        string desc = Console.ReadLine();
+        string bwDesc = Console.ReadLine();
         Console.Write("What is the amount of points associated with this goal? ");
-        string points = Console.ReadLine();
+        string bwPoints = Console.ReadLine();
 
-        if (type == "1")
+        if (bwType == "1")
         {
-            _goals.Add(new SimpleGoal(name, desc, points));
+            bwGoals.Add(new SimpleGoal(bwName, bwDesc, bwPoints));
         }
-        else if (type == "2")
+        else if (bwType == "2")
         {
-            _goals.Add(new EternalGoal(name, desc, points));
+            bwGoals.Add(new EternalGoal(bwName, bwDesc, bwPoints));
         }
-        else if (type == "3")
+        else if (bwType == "3")
         {
             Console.Write("How many times does this goal need to be accomplished for a bonus? ");
-            int target = int.Parse(Console.ReadLine());
+            int bwTarget = int.Parse(Console.ReadLine());
             Console.Write("What is the bonus for accomplishing it that many times? ");
-            int bonus = int.Parse(Console.ReadLine());
-            _goals.Add(new ChecklistGoal(name, desc, points, target, bonus));
+            int bwBonus = int.Parse(Console.ReadLine());
+            bwGoals.Add(new ChecklistGoal(bwName, bwDesc, bwPoints, bwTarget, bwBonus));
         }
-        else if (type == "4")
+        else if (bwType == "4")
         {
-            _goals.Add(new NegativeGoal(name, desc, points));
+            bwGoals.Add(new NegativeGoal(bwName, bwDesc, bwPoints));
         }
     }
 
@@ -117,43 +117,43 @@ public class GoalManager
     {
         ListGoalNames();
         Console.Write("Which goal did you accomplish? ");
-        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= _goals.Count)
+        if (int.TryParse(Console.ReadLine(), out int bwIndex) && bwIndex > 0 && bwIndex <= bwGoals.Count)
         {
-            Goal goal = _goals[index - 1];
-            goal.RecordEvent();
+            Goal bwGoal = bwGoals[bwIndex - 1];
+            bwGoal.RecordEvent();
             
-            if (goal is NegativeGoal)
+            if (bwGoal is NegativeGoal)
             {
-                _score -= goal.GetPoints();
-                Console.WriteLine($"Oh no! You lost {goal.GetPoints()} points.");
+                bwScore -= bwGoal.GetPoints();
+                Console.WriteLine($"Oh no! You lost {bwGoal.GetPoints()} points.");
             }
             else
             {
-                int earned = goal.GetPoints();
+                int bwEarned = bwGoal.GetPoints();
                 
-                if (goal is ChecklistGoal checklist && checklist.IsComplete())
+                if (bwGoal is ChecklistGoal bwChecklist && bwChecklist.IsComplete())
                 {
-                    earned += checklist.GetBonus(); 
+                    bwEarned += bwChecklist.GetBonus();
                 }
                 
-                _score += earned;
-                Console.WriteLine($"Congratulations! You have earned {earned} points!");
+                bwScore += bwEarned;
+                Console.WriteLine($"Congratulations! You have earned {bwEarned} points!");
             }
-            Console.WriteLine($"You now have {_score} points.");
+            Console.WriteLine($"You now have {bwScore} points.");
         }
     }
 
     public void SaveGoals()
     {
         Console.Write("What is the filename for the goal file? ");
-        string filename = Console.ReadLine();
+        string bwFilename = Console.ReadLine();
 
-        using (StreamWriter outputFile = new StreamWriter(filename))
+        using (StreamWriter bwOutputFile = new StreamWriter(bwFilename))
         {
-            outputFile.WriteLine(_score);
-            foreach (Goal goal in _goals)
+            bwOutputFile.WriteLine(bwScore);
+            foreach (Goal bwGoal in bwGoals)
             {
-                outputFile.WriteLine(goal.GetStringRepresentation());
+                bwOutputFile.WriteLine(bwGoal.GetStringRepresentation());
             }
         }
         Console.WriteLine("Goals saved successfully.");
@@ -162,39 +162,39 @@ public class GoalManager
     public void LoadGoals()
     {
         Console.Write("What is the filename for the goal file? ");
-        string filename = Console.ReadLine();
+        string bwFilename = Console.ReadLine();
 
-        if (File.Exists(filename))
+        if (File.Exists(bwFilename))
         {
-            _goals.Clear();
-            string[] lines = File.ReadAllLines(filename);
-            _score = int.Parse(lines[0]);
+            bwGoals.Clear();
+            string[] bwLines = File.ReadAllLines(bwFilename);
+            bwScore = int.Parse(bwLines[0]);
 
-            for (int i = 1; i < lines.Length; i++)
+            for (int bwI = 1; bwI < bwLines.Length; bwI++)
             {
-                string[] parts = lines[i].Split(':');
-                string type = parts[0];
-                string[] details = parts[1].Split(',');
+                string[] bwParts = bwLines[bwI].Split(':');
+                string bwType = bwParts[0];
+                string[] bwDetails = bwParts[1].Split(',');
 
-                if (type == "SimpleGoal")
+                if (bwType == "SimpleGoal")
                 {
-                    SimpleGoal sg = new SimpleGoal(details[0], details[1], details[2]);
-                    if (bool.Parse(details[3])) sg.RecordEvent(); 
-                    _goals.Add(sg);
+                    SimpleGoal bwSg = new SimpleGoal(bwDetails[0], bwDetails[1], bwDetails[2]);
+                    if (bool.Parse(bwDetails[3])) bwSg.RecordEvent();
+                    bwGoals.Add(bwSg);
                 }
-                else if (type == "EternalGoal")
+                else if (bwType == "EternalGoal")
                 {
-                    _goals.Add(new EternalGoal(details[0], details[1], details[2]));
+                    bwGoals.Add(new EternalGoal(bwDetails[0], bwDetails[1], bwDetails[2]));
                 }
-                else if (type == "ChecklistGoal")
+                else if (bwType == "ChecklistGoal")
                 {
-                    ChecklistGoal cg = new ChecklistGoal(details[0], details[1], details[2], int.Parse(details[4]), int.Parse(details[5]));
-                    cg.SetAmountCompleted(int.Parse(details[3]));
-                    _goals.Add(cg);
+                    ChecklistGoal bwCg = new ChecklistGoal(bwDetails[0], bwDetails[1], bwDetails[2], int.Parse(bwDetails[4]), int.Parse(bwDetails[5]));
+                    bwCg.SetAmountCompleted(int.Parse(bwDetails[3]));
+                    bwGoals.Add(bwCg);
                 }
-                else if (type == "NegativeGoal")
+                else if (bwType == "NegativeGoal")
                 {
-                    _goals.Add(new NegativeGoal(details[0], details[1], details[2]));
+                    bwGoals.Add(new NegativeGoal(bwDetails[0], bwDetails[1], bwDetails[2]));
                 }
             }
             Console.WriteLine("Goals loaded successfully.");
