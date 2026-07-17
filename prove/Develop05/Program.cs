@@ -2,8 +2,9 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main(string[] bwArgs)
     {
-        Console.WriteLine("Hello Develop05 World!");
+        GoalManager bwManager = new GoalManager();
+        bwManager.Start();
     }
 }
